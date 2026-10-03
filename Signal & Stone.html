@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Signal & Stone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--basalt:#1c232b;--slate:#27303a;--granite:#9aa5b0;--bone:#ece7df;--gold:#e0a93b;--rule:rgba(236,231,223,.15);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--basalt);color:var(--bone);font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+[dir=rtl] body,[dir=rtl] h1,[dir=rtl] h2,[dir=rtl] h3,[dir=rtl] button,[dir=rtl] a{font-family:"Cairo","Instrument Sans",sans-serif}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1040px;margin:0 auto;padding-inline:22px}
+nav{position:absolute;inset-block-start:0;inset-inline:0;z-index:3;padding-top:calc(env(safe-area-inset-top,0px) + 6px)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font:800 19px "Bricolage Grotesque",sans-serif;letter-spacing:-.01em;text-decoration:none}
+.brand i{font-style:normal;color:var(--gold)}
+.tools{display:flex;gap:10px;align-items:center}
+.lang{background:none;border:1px solid var(--rule);color:var(--bone);border-radius:99px;padding:6px 14px;font:500 14px inherit;cursor:pointer}
+.btn{display:inline-block;background:var(--gold);color:#1a1405;font:600 16px "Instrument Sans",sans-serif;text-decoration:none;padding:13px 24px;border-radius:6px;border:0;cursor:pointer}
+.btn.ghost{background:none;color:var(--bone);border:1px solid var(--rule)}
+.btn.sm{padding:8px 16px;font-size:14px}
+.btn:hover{filter:brightness(1.08)}
+.hero{position:relative;min-height:100svh;display:flex;align-items:center;overflow:hidden;isolation:isolate}
+#bg{position:absolute;inset:0;width:100%;height:100%;z-index:-2}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(to right,var(--basalt) 8%,rgba(28,35,43,.72) 48%,rgba(28,35,43,.15)),linear-gradient(to top,var(--basalt),transparent 22%)}
+[dir=rtl] .hero::after{background:linear-gradient(to left,var(--basalt) 8%,rgba(28,35,43,.72) 48%,rgba(28,35,43,.15)),linear-gradient(to top,var(--basalt),transparent 22%)}
+.hero .wrap{padding-block:110px 70px}
+h1{font:800 clamp(40px,8.4vw,92px)/.98 "Bricolage Grotesque",sans-serif;letter-spacing:-.035em;margin:0 0 22px;max-width:11ch;text-wrap:balance}
+[dir=rtl] h1{max-width:13ch;line-height:1.2;letter-spacing:0}
+.lede{max-width:46ch;font-size:19px;color:#cfd3d6;margin:0 0 30px}
+.actions{display:flex;flex-wrap:wrap;gap:12px}
+.pairs{margin-top:44px;color:var(--granite);font-size:15px;display:flex;gap:22px;flex-wrap:wrap}
+.pairs b{color:var(--bone);font-weight:600}
+section{padding-block:84px;border-top:1px solid var(--rule)}
+h2{font:800 clamp(28px,4.6vw,46px)/1.08 "Bricolage Grotesque",sans-serif;letter-spacing:-.025em;margin:0 0 14px;max-width:18ch;text-wrap:balance}
+[dir=rtl] h2{letter-spacing:0;line-height:1.3}
+.sub{color:var(--granite);max-width:52ch;margin:0 0 40px}
+.rows{margin:0;padding:0;list-style:none}
+.rows li{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:8px 40px;padding-block:22px;border-top:1px solid var(--rule)}
+.rows li:last-child{border-bottom:1px solid var(--rule)}
+.rows h3{margin:0;font:600 21px "Bricolage Grotesque",sans-serif}
+.rows p{margin:0;color:#c3c8cc}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:44px;align-items:start}
+.ticket{background:var(--slate);border-radius:10px;border-inline-start:4px solid var(--gold);padding:24px 26px}
+.ticket .top{display:flex;justify-content:space-between;gap:12px;align-items:baseline;margin-bottom:6px}
+.ticket .top b{font:800 24px "Bricolage Grotesque",sans-serif}
+.tag{font-size:13px;color:var(--granite)}
+.ticket dl{margin:16px 0 0;display:grid;grid-template-columns:auto 1fr;gap:10px 22px}
+.ticket dt{color:var(--granite)}
+.ticket dd{margin:0;font-weight:600}
+.ticket .why{margin:18px 0 0;padding-top:16px;border-top:1px solid var(--rule);color:#cfd3d6}
+.plans{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;margin-top:10px}
+.plan{padding:30px;border:1px solid var(--rule);border-radius:10px;display:flex;flex-direction:column;gap:14px}
+.plan.pro{background:var(--slate);border-color:var(--gold)}
+.plan h3{margin:0;font:600 20px "Bricolage Grotesque",sans-serif}
+.price{font:800 48px/1 "Bricolage Grotesque",sans-serif;letter-spacing:-.03em}
+.price small{font:400 16px "Instrument Sans",sans-serif;color:var(--granite);letter-spacing:0}
+.plan ul{margin:0;padding-inline-start:20px;color:#cfd3d6;flex:1}
+.plan li{margin-bottom:6px}
+details{border-top:1px solid var(--rule);padding-block:18px}
+details:last-of-type{border-bottom:1px solid var(--rule)}
+summary{cursor:pointer;font:600 19px "Bricolage Grotesque",sans-serif}
+details p{margin:10px 0 0;color:#c3c8cc;max-width:60ch}
+.final{text-align:start}
+footer{padding-block:34px calc(34px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--rule);color:var(--granite);font-size:14px}
+footer p{max-width:80ch;margin:0}
+@media(max-width:760px){.rows li,.split,.plans{grid-template-columns:minmax(0,1fr)}.rows li{gap:6px}section{padding-block:60px}.hero::after{background:linear-gradient(to top,var(--basalt) 10%,rgba(28,35,43,.8) 55%,rgba(28,35,43,.4))}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+<a class="brand" href="#top">Signal <i>&amp;</i> Stone</a>
+<div class="tools"><button class="lang" id="lang" aria-label="Language">العربية</button><a class="btn sm" href="#join" data-ar="انضم مجاناً">Join free</a></div>
+</div></nav>
+
+<header class="hero" id="top">
+<canvas id="bg" aria-hidden="true"></canvas>
+<div class="wrap">
+<h1 data-ar="تداول بالإشارة. وقف على أرض صلبة.">Trade the signal. Stand on stone.</h1>
+<p class="lede" data-ar="مجتمع تداول للعملات الرقمية والذهب. كل توصية تأتي مع سببها ونقطة دخولها ووقف خسارتها ومقدار المخاطرة فيها.">A trading community for crypto and gold. Every call comes with its reason, its entry, its stop, and the risk behind it.</p>
+<div class="actions">
+<a class="btn" href="#join" data-ar="انضم مجاناً">Join free</a>
+<a class="btn ghost" href="#sample" data-ar="شاهد مثالاً على توصية">See a sample signal</a>
+</div>
+<div class="pairs"><span><b>BTC</b> / USD</span><span><b>ETH</b> / USD</span><span><b>XAU</b> / USD</span></div>
+</div>
+</header>
+
+<section id="what"><div class="wrap">
+<h2 data-ar="ما الذي ستجده بالداخل">What you get inside</h2>
+<p class="sub" data-ar="أربعة أشياء فقط، نفعلها جيداً." >Four things, done properly.</p>
+<ul class="rows">
+<li><h3 data-ar="رسوم بيانية مع أسبابها">Charts with reasons</h3><p data-ar="كل فكرة تُنشر على TradingView ومعها المنطق مكتوباً بجانبها، فتتعلم ولا تنسخ فقط.">Every idea is posted on TradingView with the logic written beside it, so you learn instead of just copying.</p></li>
+<li><h3 data-ar="توصيات بوقف خسارة">Signals with a stop</h3><p data-ar="منطقة الدخول ووقف الخسارة والأهداف، لتعرف دائماً كم تخاطر قبل أن تدخل.">Entry zone, stop-loss, and targets, so you always know what you risk before you enter.</p></li>
+<li><h3 data-ar="منتدى يجيب">A forum that answers</h3><p data-ar="اطرح سؤالك في المنتدى وستحصل على رد، لا على إعجاب فقط.">Ask in the forum and get a reply, not just a like.</p></li>
+<li><h3 data-ar="سجل نتائج علني">A public track record</h3><p data-ar="الرابحة والخاسرة تُسجَّل في مكان واحد. لا حذف ولا تجميل.">Wins and losses logged in one place. Nothing deleted, nothing polished.</p></li>
+</ul>
+</div></section>
+
+<section id="sample"><div class="wrap split">
+<div>
+<h2 data-ar="هكذا تبدو التوصية">What a signal looks like</h2>
+<p class="sub" data-ar="شكل ثابت في كل مرة. هذا مثال على التنسيق فقط وليس توصية حقيقية.">The same format every time. This is an example of the layout only, not a real call.</p>
+</div>
+<article class="ticket" aria-label="Example signal">
+<div class="top"><b>XAU/USD</b><span class="tag" data-ar="مثال على التنسيق">Format example</span></div>
+<span style="color:var(--gold);font-weight:600" data-ar="شراء">Long</span>
+<dl>
+<dt data-ar="الدخول">Entry</dt><dd data-ar="منطقة سعرية محددة">A defined price zone</dd>
+<dt data-ar="وقف الخسارة">Stop</dt><dd data-ar="تحت مستوى الدعم">Below the support level</dd>
+<dt data-ar="الأهداف">Targets</dt><dd data-ar="هدفان، نقل الوقف بعد الأول">Two, stop moves after the first</dd>
+<dt data-ar="المخاطرة">Risk</dt><dd data-ar="1% من الحساب كحد أقصى">1% of account at most</dd>
+</dl>
+<p class="why" data-ar="السبب: السعر اختبر مستوى الدعم ثلاث مرات وأغلق فوقه، والزخم يتحسن على الإطار الأربع ساعات.">Why: price tested support three times and closed above it, and momentum is improving on the 4-hour chart.</p>
+</article>
+</div></section>
+
+<section id="join"><div class="wrap">
+<h2 data-ar="اختر مكانك">Pick your spot</h2>
+<p class="sub" data-ar="ابدأ مجاناً. اترقَّ عندما تحتاج إلى التوصيات الكاملة.">Start free. Upgrade when you want the full signals.</p>
+<div class="plans">
+<div class="plan"><h3 data-ar="مجاني">Free</h3><div class="price">$0</div>
+<ul><li data-ar="الوصول إلى المنتدى">Forum access</li><li data-ar="قراءة أسبوعية للسوق">A weekly market read</li><li data-ar="دروس تعليمية مختارة">Selected lessons</li></ul>
+<a class="btn ghost" href="#" data-ar="انضم مجاناً">Join free</a></div>
+<div class="plan pro"><h3 data-ar="عضو">Member</h3><div class="price">$29<small data-ar=" / شهرياً"> / month</small></div>
+<ul><li data-ar="كل التوصيات مع الدخول والوقف والأهداف">Every signal with entry, stop, and targets</li><li data-ar="أفكار رسوم بيانية مباشرة على TradingView">Live chart ideas on TradingView</li><li data-ar="سجل النتائج الكامل">The full track record</li><li data-ar="دردشة خاصة بالأعضاء">Members-only chat</li></ul>
+<a class="btn" href="#" data-ar="كن عضواً">Become a member</a></div>
+</div>
+</div></section>
+
+<section><div class="wrap">
+<h2 data-ar="أسئلة قبل الانضمام">Before you join</h2>
+<details><summary data-ar="هل تضمنون الأرباح؟">Do you guarantee profits?</summary><p data-ar="لا. لا أحد يستطيع ذلك. التداول ينطوي على مخاطر وقد تخسر جزءاً من رأس مالك أو كله.">No. Nobody can. Trading carries risk and you can lose some or all of your capital.</p></details>
+<details><summary data-ar="هل هذه نصيحة مالية؟">Is this financial advice?</summary><p data-ar="لا. المحتوى تعليمي فقط. قرارك وأموالك مسؤوليتك.">No. The content is educational. Your decisions and your money are your responsibility.</p></details>
+<details><summary data-ar="هل أستطيع الإلغاء في أي وقت؟">Can I cancel any time?</summary><p data-ar="نعم. يمكنك إلغاء اشتراكك في أي وقت من حسابك على Whop.">Yes. Cancel your membership any time from your Whop account.</p></details>
+</div></section>
+
+<footer><div class="wrap"><p data-ar="Signal &amp; Stone محتوى تعليمي فقط وليس نصيحة مالية أو استثمارية. الأداء السابق لا يضمن النتائج المستقبلية. تداول فقط بمال تستطيع تحمّل خسارته.">Signal &amp; Stone is educational content, not financial or investment advice. Past performance does not guarantee future results. Only trade money you can afford to lose.</p></div></footer>
+
+<script>
+(function(){
+var els=document.querySelectorAll('[data-ar]');
+els.forEach(function(e){e.setAttribute('data-en',e.innerHTML)});
+var btn=document.getElementById('lang'),ar=false;
+btn.addEventListener('click',function(){
+ar=!ar;
+document.documentElement.lang=ar?'ar':'en';
+document.documentElement.dir=ar?'rtl':'ltr';
+els.forEach(function(e){e.innerHTML=e.getAttribute(ar?'data-ar':'data-en')});
+btn.textContent=ar?'English':'العربية';
+});
+
+var c=document.getElementById('bg'),x=c.getContext('2d'),W,H,D,step=14,off=0,k,candles=[],p=0,
+reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function next(){
+var o=p;p+= (Math.random()-.5)*26 - p*.015 + 1.2;
+var cl=p,hi=Math.max(o,cl)+Math.random()*12,lo=Math.min(o,cl)-Math.random()*12;
+candles.push({o:o,c:cl,h:hi,l:lo});
+}
+function size(){
+D=Math.min(devicePixelRatio||1,2);W=c.clientWidth;H=c.clientHeight;
+c.width=W*D;c.height=H*D;x.setTransform(D,0,0,D,0,0);
+k=H/520;
+var n=Math.ceil(W/step)+4;
+while(candles.length<n)next();
+}
+function draw(){
+x.clearRect(0,0,W,H);
+var mid=H*.52,y=function(v){return mid-v*k};
+var sup=y(-70);
+x.setLineDash([6,8]);x.strokeStyle='rgba(154,165,176,.45)';x.lineWidth=1;
+x.beginPath();x.moveTo(0,sup);x.lineTo(W,sup);x.stroke();x.setLineDash([]);
+candles.forEach(function(cd,i){
+var cx=i*step-off+step/2,up=cd.c>=cd.o;
+x.strokeStyle=up?'rgba(224,169,59,.75)':'rgba(154,165,176,.5)';
+x.fillStyle=up?'rgba(224,169,59,.55)':'rgba(154,165,176,.28)';
+x.lineWidth=1;
+x.beginPath();x.moveTo(cx,y(cd.h));x.lineTo(cx,y(cd.l));x.stroke();
+var t=y(Math.max(cd.o,cd.c)),b=y(Math.min(cd.o,cd.c));
+x.fillRect(cx-4,t,8,Math.max(2,b-t));
+});
+x.beginPath();
+for(var i=7;i<candles.length;i++){
+var s=0;for(var j=0;j<8;j++)s+=candles[i-j].c;
+var px=i*step-off+step/2,py=y(s/8);
+if(i===7)x.moveTo(px,py);else x.lineTo(px,py);
+}
+x.shadowColor='rgba(224,169,59,.8)';x.shadowBlur=14;
+x.strokeStyle='#f0bd55';x.lineWidth=2.5;x.stroke();x.shadowBlur=0;
+}
+function loop(){
+off+=.35;
+if(off>=step){off-=step;candles.shift();next()}
+draw();requestAnimationFrame(loop);
+}
+addEventListener('resize',function(){size();draw()});
+size();
+if(reduce)draw();else loop();
+})();
+</script>
+</body>
+</html>
